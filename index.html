@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Double O Family Gift Wishlist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #8e44ad;
+            --secondary: #2980b9;
+            --accent: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --info: #2980b9;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border: #dee2e6;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            color: white;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-title i {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.2);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .gift-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .gift-item {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .gift-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .gift-header {
+            padding: 15px;
+            background: var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .gift-body {
+            padding: 15px;
+        }
+        
+        .gift-description {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        
+        .gift-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .gift-link:hover {
+            text-decoration: underline;
+        }
+        
+        .gift-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+        
+        .gift-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: var(--light);
+            border-top: 1px solid var(--border);
+        }
+        
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+        }
+        
+        .status-available {
+            color: var(--success);
+        }
+        
+        .status-purchased {
+            color: var(--gray);
+        }
+        
+        .purchased-by {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+        
+        .participant-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .participant-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .participant-email {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .wishlist-count {
+            background: var(--secondary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-left: 10px;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 20px;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--gray);
+        }
+        
+        .step.active .step-number {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background: var(--success);
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 0.9rem;
+            text-align: center;
+            max-width: 120px;
+        }
+        
+        .notification {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notification.success {
+            background: rgba(39, 174, 96, 0.15);
+            border-left: 4px solid var(--success);
+            color: var(--success);
+        }
+        
+        .notification.warning {
+            background: rgba(243, 156, 18, 0.15);
+            border-left: 4px solid var(--warning);
+            color: var(--warning);
+        }
+        
+        .notification.info {
+            background: rgba(41, 128, 185, 0.15);
+            border-left: 4px solid var(--info);
+            color: var(--info);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 25px 0;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .gift-list {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-gift"></i> The Double O Family Gift Wishlist</h1>
+            <p>Create a family gift exchange where everyone shares their wishlist and buys gifts for each other!</p>
+        </header>
+        
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+            <div class="step completed" id="step1">
+                <div class="step-number">1</div>
+                <div class="step-label">Create Exchange</div>
+            </div>
+            <div class="step active" id="step2">
+                <div class="step-number">2</div>
+                <div class="step-label">Add Family</div>
+            </div>
+            <div class="step" id="step3">
+                <div class="step-number">3</div>
+                <div class="step-label">Share & Buy</div>
+            </div>
+        </div>
+        
+        <!-- Create Exchange Form -->
+        <div class="card" id="create-exchange">
+            <h2 class="card-title"><i class="fas fa-plus-circle"></i> Create a New Family Gift Exchange</h2>
+            <form id="exchange-form">
+                <div class="form-group">
+                    <label for="exchange-name">Exchange Name *</label>
+                    <input type="text" id="exchange-name" placeholder="Double O Family Holiday Exchange" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gift-limit">Max Gifts Per Person *</label>
+                    <select id="gift-limit" required>
+                        <option value="1">1 gift</option>
+                        <option value="2" selected>2 gifts</option>
+                        <option value="3">3 gifts</option>
+                        <option value="5">5 gifts</option>
+                        <option value="10">10 gifts</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="participants">Family Member Emails (one per line) *</label>
+                    <textarea id="participants" placeholder="mom@doubleofamily.com&#10;dad@doubleofamily.com&#10;sister@doubleofamily.com" required></textarea>
+                    <small>Enter at least 2 email addresses</small>
+                </div>
+                
+                <button type="submit" class="btn btn-block">Create Exchange & Send Invitations</button>
+            </form>
+        </div>
+        
+        <!-- Notification Area -->
+        <div class="notification info hidden" id="notification">
+            <i class="fas fa-info-circle"></i>
+            <span id="notification-text"></span>
+        </div>
+        
+        <!-- Participant List -->
+        <div class="card hidden" id="participant-list">
+            <h2 class="card-title"><i class="fas fa-users"></i> Family Members</h2>
+            <div id="participants-container"></div>
+        </div>
+        
+        <!-- Wishlist Section -->
+        <div class="card hidden" id="wishlist-section">
+            <h2 class="card-title"><i class="fas fa-list"></i> Your Wishlist</h2>
+            <p>Share what you'd like to receive! You can add up to <span id="max-gifts">2</span> items.</p>
+            
+            <div class="form-group">
+                <label for="gift-description">Gift Description *</label>
+                <textarea id="gift-description" placeholder="Describe what you want..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="gift-link">Product Link (optional)</label>
+                <input type="url" id="gift-link" placeholder="https://store.com/product">
+            </div>
+            
+            <div class="form-group">
+                <label for="gift-image">Image URL (optional)</label>
+                <input type="url" id="gift-image" placeholder="https://example.com/image.jpg">
+            </div>
+            
+            <button id="add-gift" class="btn">Add to Wishlist</button>
+            
+            <div class="divider"></div>
+            
+            <h3>Your Wishlist Items</h3>
+            <div id="my-wishlist" class="gift-list">
+                <!-- Wishlist items will be added here -->
+            </div>
+        </div>
+        
+        <!-- All Wishlists -->
+        <div class="card hidden" id="all-wishlists">
+            <h2 class="card-title"><i class="fas fa-gifts"></i> Everyone's Wishlists</h2>
+            <p>See what everyone wants! Mark gifts as purchased when you buy them.</p>
+            
+            <div id="all-wishlists-container"></div>
+        </div>
+        
+        <footer>
+            <p>The Double O Family Gift Wishlist &copy; 2023 | Share the joy of giving!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Sample data to simulate the exchange
+        let exchangeData = {
+            name: "Double O Family Holiday Exchange",
+            maxGifts: 2,
+            participants: [
+                { email: "mom@doubleofamily.com", name: "Mom" },
+                { email: "dad@doubleofamily.com", name: "Dad" },
+                { email: "sister@doubleofamily.com", name: "Sister" }
+            ],
+            wishlists: {}
+        };
+        
+        // Initialize wishlists for each participant
+        exchangeData.participants.forEach(participant => {
+            exchangeData.wishlists[participant.email] = [];
+        });
+        
+        // DOM Elements
+        const createExchangeForm = document.getElementById('exchange-form');
+        const participantList = document.getElementById('participant-list');
+        const participantsContainer = document.getElementById('participants-container');
+        const wishlistSection = document.getElementById('wishlist-section');
+        const allWishlists = document.getElementById('all-wishlists');
+        const allWishlistsContainer = document.getElementById('all-wishlists-container');
+        const addGiftBtn = document.getElementById('add-gift');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notification-text');
+        
+        // Show notification
+        function showNotification(message, type = 'info') {
+            notification.className = `notification ${type} ${message ? '' : 'hidden'}`;
+            notificationText.textContent = message;
+        }
+        
+        // Validate email
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+        
+        // Create exchange form submission
+        createExchangeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const exchangeName = document.getElementById('exchange-name').value;
+            const giftLimit = parseInt(document.getElementById('gift-limit').value);
+            const participantsInput = document.getElementById('participants').value;
+            
+            // Parse emails
+            const emails = participantsInput.split('\n')
+                .map(email => email.trim())
+                .filter(email => email.length > 0);
+            
+            // Validate
+            if (emails.length < 2) {
+                showNotification('Please enter at least 2 email addresses', 'warning');
+                return;
+            }
+            
+            const invalidEmails = emails.filter(email => !isValidEmail(email));
+            if (invalidEmails.length > 0) {
+                showNotification(`Invalid email addresses: ${invalidEmails.join(', ')}`, 'warning');
+                return;
+            }
+            
+            // Update exchange data
+            exchangeData.name = exchangeName;
+            exchangeData.maxGifts = giftLimit;
+            exchangeData.participants = emails.map(email => ({
+                email: email,
+                name: email.split('@')[0].replace(/\./g, ' ').replace(/\d+/g, '')
+            }));
+            
+            // Initialize wishlists
+            exchangeData.wishlists = {};
+            exchangeData.participants.forEach(participant => {
+                exchangeData.wishlists[participant.email] = [];
+            });
+            
+            // Update UI
+            document.getElementById('max-gifts').textContent = giftLimit;
+            renderParticipantList();
+            renderWishlistSection();
+            renderAllWishlists();
+            
+            // Show next steps
+            participantList.classList.remove('hidden');
+            wishlistSection.classList.remove('hidden');
+            allWishlists.classList.remove('hidden');
+            
+            // Update step indicator
+            document.getElementById('step1').classList.add('completed');
+            document.getElementById('step2').classList.add('completed');
+            document.getElementById('step3').classList.add('active');
+            
+            showNotification('Exchange created successfully! Invitations would be sent in a real application.', 'success');
+        });
+        
+        // Render participant list
+        function renderParticipantList() {
+            participantsContainer.innerHTML = '';
+            
+            exchangeData.participants.forEach(participant => {
+                const card = document.createElement('div');
+                card.className = 'participant-card';
+                card.innerHTML = `
+                    <div class="participant-name">${participant.name}</div>
+                    <div class="participant-email">${participant.email}</div>
+                `;
+                participantsContainer.appendChild(card);
+            });
+        }
+        
+        // Render wishlist section
+        function renderWishlistSection() {
+            const myWishlist = document.getElementById('my-wishlist');
+            myWishlist.innerHTML = '';
+            
+            // For demo, we'll use the first participant as "current user"
+            const currentUser = exchangeData.participants[0].email;
+            const wishlist = exchangeData.wishlists[currentUser];
+            
+            if (wishlist.length === 0) {
+                myWishlist.innerHTML = '<p class="text-center">Your wishlist is empty. Add some gifts!</p>';
+                return;
+            }
+            
+            wishlist.forEach((gift, index) => {
+                const giftItem = document.createElement('div');
+                giftItem.className = 'gift-item';
+                giftItem.innerHTML = `
+                    <div class="gift-header">
+                        <strong>Gift #${index + 1}</strong>
+                        <button class="btn btn-sm btn-outline" onclick="removeGift('${currentUser}', ${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="gift-body">
+                        <div class="gift-description">${gift.description || 'No description'}</div>
+                        ${gift.link ? `<a href="${gift.link}" target="_blank" class="gift-link">View Product</a>` : ''}
+                        ${gift.image ? `<img src="${gift.image}" alt="Gift image" class="gift-image">` : '<div class="gift-image">No image provided</div>'}
+                    </div>
+                `;
+                myWishlist.appendChild(giftItem);
+            });
+        }
+        
+        // Add gift to wishlist
+        addGiftBtn.addEventListener('click', function() {
+            const description = document.getElementById('gift-description').value;
+            const link = document.getElementById('gift-link').value;
+            const image = document.getElementById('gift-image').value;
+            
+            // For demo, we'll use the first participant as "current user"
+            const currentUser = exchangeData.participants[0].email;
+            const wishlist = exchangeData.wishlists[currentUser];
+            
+            if (wishlist.length >= exchangeData.maxGifts) {
+                showNotification(`You can only add up to ${exchangeData.maxGifts} gifts to your wishlist`, 'warning');
+                return;
+            }
+            
+            if (!description.trim()) {
+                showNotification('Please provide a gift description', 'warning');
+                return;
+            }
+            
+            // Add gift
+            exchangeData.wishlists[currentUser].push({
+                description: description,
+                link: link || null,
+                image: image || null,
+                purchased: false,
+                purchasedBy: null
+            });
+            
+            // Reset form
+            document.getElementById('gift-description').value = '';
+            document.getElementById('gift-link').value = '';
+            document.getElementById('gift-image').value = '';
+            
+            // Update UI
+            renderWishlistSection();
+            renderAllWishlists();
+            showNotification('Gift added to your wishlist!', 'success');
+        });
+        
+        // Remove gift from wishlist
+        window.removeGift = function(userEmail, index) {
+            exchangeData.wishlists[userEmail].splice(index, 1);
+            renderWishlistSection();
+            renderAllWishlists();
+            showNotification('Gift removed from your wishlist', 'info');
+        };
+        
+        // Mark gift as purchased
+        window.markAsPurchased = function(userEmail, giftIndex) {
+            const gift = exchangeData.wishlists[userEmail][giftIndex];
+            if (gift.purchased) {
+                gift.purchased = false;
+                gift.purchasedBy = null;
+                showNotification('Purchase status removed', 'info');
+            } else {
+                // For demo, we'll use the second participant as the purchaser
+                const purchaser = exchangeData.participants[1].name;
+                gift.purchased = true;
+                gift.purchasedBy = purchaser;
+                showNotification(`Gift marked as purchased by ${purchaser}!`, 'success');
+            }
+            renderAllWishlists();
+        };
+        
+        // Render all wishlists
+        function renderAllWishlists() {
+            allWishlistsContainer.innerHTML = '';
+            
+            // For demo, we'll use the first participant as "current user"
+            const currentUser = exchangeData.participants[0].email;
+            
+            exchangeData.participants.forEach(participant => {
+                const wishlist = exchangeData.wishlists[participant.email];
+                
+                if (wishlist.length === 0) return;
+                
+                const participantSection = document.createElement('div');
+                participantSection.className = 'participant-section';
+                participantSection.innerHTML = `
+                    <h3>${participant.name}'s Wishlist</h3>
+                    <div class="gift-list" id="wishlist-${participant.email.replace('@', '-at-')}"></div>
+                `;
+                allWishlistsContainer.appendChild(participantSection);
+                
+                const wishlistContainer = participantSection.querySelector('.gift-list');
+                
+                wishlist.forEach((gift, index) => {
+                    const giftItem = document.createElement('div');
+                    giftItem.className = 'gift-item';
+                    
+                    // Determine if this is the current user's wishlist
+                    const isCurrentUser = participant.email === currentUser;
+                    
+                    // Don't show purchase status for own gifts
+                    let purchaseInfo = '';
+                    if (!isCurrentUser) {
+                        if (gift.purchased) {
+                            purchaseInfo = `
+                                <div class="status-indicator status-purchased">
+                                    <i class="fas fa-check-circle"></i> Purchased
+                                </div>
+                                <div class="purchased-by">by ${gift.purchasedBy}</div>
+                            `;
+                        } else {
+                            purchaseInfo = `
+                                <div class="status-indicator status-available">
+                                    <i class="fas fa-shopping-cart"></i> Available
+                                </div>
+                            `;
+                        }
+                    }
+                    
+                    giftItem.innerHTML = `
+                        <div class="gift-header">
+                            <strong>Gift #${index + 1}</strong>
+                            ${!isCurrentUser ? `<button class="btn btn-sm btn-outline" onclick="markAsPurchased('${participant.email}', ${index})">
+                                ${gift.purchased ? '<i class="fas fa-undo"></i> Undo' : '<i class="fas fa-check"></i> Mark Purchased'}
+                            </button>` : ''}
+                        </div>
+                        <div class="gift-body">
+                            <div class="gift-description">${gift.description || 'No description'}</div>
+                            ${gift.link ? `<a href="${gift.link}" target="_blank" class="gift-link">View Product</a>` : ''}
+                            ${gift.image ? `<img src="${gift.image}" alt="Gift image" class="gift-image">` : '<div class="gift-image">No image provided</div>'}
+                        </div>
+                        <div class="gift-actions">
+                            ${purchaseInfo}
+                        </div>
+                    `;
+                    wishlistContainer.appendChild(giftItem);
+                });
+            });
+        }
+        
+        // Initialize with sample data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pre-fill form with sample data for demo
+            document.getElementById('exchange-name').value = "Double O Family Holiday Exchange";
+            document.getElementById('participants').value = "mom@doubleofamily.com\ndad@doubleofamily.com\nsister@doubleofamily.com";
+            
+            // Add sample wishlist items
+            exchangeData.wishlists["mom@doubleofamily.com"] = [
+                {
+                    description: "Cozy knitted sweater in purple",
+                    link: "https://example.com/sweater",
+                    image: "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    purchased: false,
+                    purchasedBy: null
+                },
+                {
+                    description: "Scented candle with vanilla fragrance",
+                    link: null,
+                    image: null,
+                    purchased: true,
+                    purchasedBy: "Dad"
+                }
+            ];
+            
+            exchangeData.wishlists["dad@doubleofamily.com"] = [
+                {
+                    description: "Wireless Bluetooth headphones",
+                    link: "https://example.com/headphones",
+                    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    purchased: false,
+                    purchasedBy: null
+                }
+            ];
+            
+            exchangeData.wishlists["sister@doubleofamily.com"] = [
+                {
+                    description: "Journal with floral cover",
+                    link: null,
+                    image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    purchased: false,
+                    purchasedBy: null
+                }
+            ];
+            
+            // Render initial state
+            renderParticipantList();
+            renderWishlistSection();
+            renderAllWishlists();
+            participantList.classList.remove('hidden');
+            wishlistSection.classList.remove('hidden');
+            allWishlists.classList.remove('hidden');
+            document.getElementById('step1').classList.add('completed');
+            document.getElementById('step2').classList.add('completed');
+            document.getElementById('step3').classList.add('active');
+        });
+    </script>
+</body>
+</html>
